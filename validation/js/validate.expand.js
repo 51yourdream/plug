@@ -2,16 +2,12 @@
 * @Author: lipeng
 * @Date:   2015-12-09 17:24:57
 * @Last Modified by:   lipeng
-* @Last Modified time: 2015-12-09 17:25:43
+* @Last Modified time: 2015-12-09 20:59:58
 */
 
- jQuery.validator.addMethod("userName", function(value, element) {
+// 自定义验证方法 
 
-    return this.optional(element) || /^[\u0391-\uFFE5\w]+$/.test(value);
-
-}, "用户名必须在5-10个字符之间");   
-
-jQuery.validator.addMethod("isZipCode", function(value, element) {   
+jQuery.validator.addMethod("isZipCode", function(value, element) {   //验证邮编
 
     var tel = /^[0-9]{6}$/;
 
