@@ -18,8 +18,9 @@
 		<label for="">creditcard</label><input type="text" name="creditcard"/><br/><br/>
 		<label for="">rangelength</label><input type="text" name="rangelength"/><br/><br/>
 		<label for="">range</label><input type="text" name="range"/><br/><br/>
-		<label for="">男</label><input type="radio" name="sex" id="" value="man">
-		<label for="">女</label><input type="radio" name="sex" id="" value="woman"><br/><br/>
+		<label for="">required:"#aa:checked"表达式的值为真，则需要验证</label><input type="text" name="special"/><br/><br/>
+		<label for="">男</label><input type="radio" name="sex" id="a" value="man">
+		<label for="">女</label><input type="radio" name="sex" id="b" value="woman"><br/><br/>
 		<label for="">新密码</label><input type="password" name="password" id="password"><br/><br/>
 		<label for="">再次输入密码</label><input type="password" name="repassword" id=""><br/><br/>
 		<input type="submit" value="提交">
@@ -28,6 +29,7 @@
 <script src="../js/jquery-2.1.4.min.js">.</script> <!-- 提示中文库 -->
 <script src="../js/jquery.validate.js"></script>
 <script src="../js/jquery.validate.messages_cn.js"></script> <!-- 提示中文库 -->
+<script src="../js/jquery.metadata.js"></script> <!-- 校验规则写到控件中 -->
 
 </body>
 </html>
@@ -79,6 +81,10 @@
 					required:true,
 					range:[5,10]
 				},
+				special:{
+					required:"#a:checked",
+					rangelength:[5,10]
+				}
 
 			},
 			messages:{
@@ -126,6 +132,10 @@
 					required:"请输入数字",
 					range:jQuery.validator.format("请输入一个介于 {0} 和 {1} 之间的值"),
 				},
+				special:{
+					required:"不知道男有没有被选中",
+					rangelength:jQuery.validator.format("请输入 一个长度介于 {0} 和 {1} 之间的字符串(汉字算一个字符)")
+				},
 				password: {
 				    required: "请输入密码",
 				    minlength: jQuery.validator.format("密码不能小于{0}个字 符")
@@ -134,11 +144,20 @@
 					required:"请输入密码",
 					equalTo:"请再次输入相同的密码"
 				}
-			}
-			// 错误提示位置
-			// errorPlacement:function(error,element){
-			// 	error.appendTo(element.siblings('span'));
-			// }
+			},
+			// submitHandler:function(form){	//这里也可以设置表单提交
+			//             alert("submitted");   
+			//             form.submit();
+			//         } 
 		});
 	});
+// 可以设置validate的默认值，写法如下：
+$.validator.setDefaults({ 
+ submitHandler: function(form) { alert("submitted!");form.submit(); }
+});
+
+// required:true 必须有值
+// required:"#aa:checked"表达式的值为真，则需要验证
+// required:function(){}返回为真，表时需要验证
+// 后边两种常用于，表单中需要同时填或不填的元素
 </script>

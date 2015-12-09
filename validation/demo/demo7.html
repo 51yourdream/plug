@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery.validate.js插件的学习使用</title>
+	<link rel="stylesheet" href="../css/validation.css">
+</head>
+<body>
+<h2>添加自定义验证 </h2>
+	<form id="validate-form" method="get">
+		<div>
+			<label for="zhongwen">自定义验证方法:</label>
+			<input type="text" id="zhongwen" name="zhongwen" />
+		</div>
+		<div>
+			<label for="username">Username:</label>
+			<input type="text" id="username" name="username" />
+		</div>
+		<div>
+			<label for="password">password:</label>
+			<input type="text" id="password" name="password" />
+		</div>
+		<div>
+			<label for="password1">password1:</label>
+			<input type="text" id="password1" name="password1" />
+		</div>
+		<div>
+			<label for="sex">sex:</label>
+			<select id="sex" name="sex">
+				<option id="sexopt" value="" selected="selected">请选择</option>
+				<option id="sexnan" value="1">男</option>
+				<option id="sexnv" value="2">女</option>
+			</select>
+		</div>
+		<div>
+			<label for="favorite">level:</label>
+			<input type="checkbox" id="sport" name="favorite" value="sport" />sport
+			<input type="checkbox" id="write" name="favorite" value="write" />write
+		</div>
+		<div>
+			<label for="level">level:</label>
+			<input type="radio" id="one" name="level" value="one" />1
+			<input type="radio" id="two" name="level" value="two" />2
+		</div>
+		<div>
+			<input type="submit" value="提交">
+			<input type="button" id="reset" value="重置">
+		</div>
+	</form>
+<script src="../js/jquery-2.1.4.min.js">.</script> <!-- 提示中文库 -->
+<script src="../js/jquery.validate.js"></script>
+<script src="../js/jquery.validate.messages_cn.js"></script> <!-- 提示中文库 -->
+<script src="../js/jquery.metadata.js"></script> <!-- 校验规则写到控件中 -->
+<script src="../js/validate.expand.js"></script> <!-- 校验规则写到控件中 -->
+
+</body>
+</html>
+<script>
+	$(function(){
+		var validator = $("#validate-form").validate({
+			rules:{
+				zhongwen:{
+					required:true,
+					userName:true
+				},
+				username:{
+					required: true
+				},
+				password:{
+					required: true
+				},
+				sex:{
+					required: true
+				},
+				level:{
+					required: true
+				},
+				favorite:{
+					required: true
+				}
+			},
+			messages:{
+				username:{
+					required:"请输入用户名!"
+				},
+				password:{
+					required:"请输入密码!"
+				},
+				sex:{
+					required:"请选择性别!"
+				},
+				level:{
+					required:"级别"
+				},
+				favorite: {
+					required:"喜爱程度"
+				}
+			},
+			errorPlacement:function (error,element) { //指定错误信息位置
+				if (element.is(':radio') || element.is(':checkbox')) { //如果是radio或checkbox
+					var eid = element.attr('name'); //获取元素的name属性
+					error.appendTo(element.parent()); //将错误信息添加当前元素的父结点后面
+				} else {
+					error.insertAfter(element);
+				}
+			},
+			errorClass:"error", // 指定错误提示的css类名，可以自定义错误提示的样式 默认是error
+			errorElement:"label", //用什么标签标记错误，默认的是label你可以改成em
+			success:"checked",
+			
+		});
+		$("#reset").click(function(){
+			validator.resetForm();
+		});
+	});
+</script>

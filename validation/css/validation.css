@@ -1,0 +1,21 @@
+/* 
+* @Author: lipeng
+* @Date:   2015-12-09 16:28:14
+* @Last Modified by:   lipeng
+* @Last Modified time: 2015-12-09 16:29:54
+*/
+input.error { border: 1px solid red; }
+label.error {
+  background:url("../images/unchecked.gif") no-repeat 0px 0px;
+
+  padding-left: 16px;
+
+  padding-bottom: 2px;
+
+  font-weight: bold;
+
+  color: #EA5200;
+}
+label.checked {
+  background:url("../images/checked.gif") no-repeat 0px 0px;
+}

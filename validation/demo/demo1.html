@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery.validate.js插件的学习使用</title>
+</head>
+<body>
+<h2>定义规则和错误提示信息 阻止表单提交-常用于验证测试</h2>
+	<form action="" id="validate-form" method="post">
+		<label for="">新密码</label><input type="password" name="password" id="password"><br/><br/>
+		<label for="">再次输入密码</label><input type="password" name="repassword" id=""><br/><br/>
+		<input type="submit" value="提交">
+		<input type="reset" value="重置">
+	</form>
+<script src="../js/jquery-2.1.4.min.js">.</script> <!-- 提示中文库 -->
+<script src="../js/jquery.validate.js"></script>
+<script src="../js/jquery.validate.messages_cn.js"></script> <!-- 提示中文库 -->
+<script src="../js/jquery.metadata.js"></script> <!-- 校验规则写到控件中 -->
+
+</body>
+</html>
+<script>
+	$(function(){
+		$("#validate-form").validate({
+			debug:true, //这个值如果为true则只验证不提交表单 但是不能 设置 submitHandler值 否则不起作用
+			// 自定义验证规则
+			rules:{
+				password: {
+				    required: true,
+				    minlength: 5
+				   },
+				repassword:{
+					required:true,
+					equalTo:"#password"   //这里虽然用class也可以但是不建议用
+				}
+			},
+			messages:{
+				password: {
+				    required: "请输入密码",
+				    minlength: jQuery.validator.format("密码不能小于{0}个字 符")
+				   },
+				repassword:{
+					required:"请输入密码",
+					equalTo:"请再次输入相同的密码"
+				}
+			},
+			submitHandler: function(form) { alert("submitted!");form.submit(); }
+		});
+	});
+	
+	// 如果一个页面中有多个表单都想设置成为debug，用
+	// $.validator.setDefaults({
+	//    debug: true
+	// })
+
+</script>
