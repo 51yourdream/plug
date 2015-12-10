@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>autocomplete.js 插件学习</title>
+        <link rel="stylesheet" href="../css/jquery-ui.css" type="text/css">
+        <link rel="stylesheet" href="../css/jquery-ui.theme.css" type="text/css">
+        <style>
+			.margin-top-bottom{margin-bottom: 5px;margin-top: 5px}
+			.padding-top-bottom{padding-top: 5px;padding-bottom: 5px}
+			#output{color:red;}
+        </style>
+    </head>
+    <body>
+    <h2>autocomplete </h2>
+    	<form action="../php/demo.php" method="get" id="form-id">
+    		<div class="margin-top-bottom padding-top-bottom">
+    			<input type="text" name="search" class="selector">
+    		</div>
+            <div id="someElem"></div>
+    	</form>
+    	<div id="output"></div>
+		<script src="../js/jquery-2.1.4.min.js"></script> 
+    	<script src="../js/jquery-ui.js"></script>
+    </body>
+</html>
+<script>
+$(function() {
+  var availableTags = [
+    "ActionScript",
+    "AppleScript",
+    "Asp",
+    "BASIC",
+    "C",
+    "C++",
+    "Clojure",
+    "COBOL",
+    "ColdFusion",
+    "Erlang",
+    "Fortran",
+    "Groovy",
+    "Haskell",
+    "Java",
+    "JavaScript",
+    "Lisp",
+    "Perl",
+    "PHP",
+    "Python",
+    "Ruby",
+    "Scala",
+    "Scheme"
+  ];
+  $( ".selector" ).autocomplete({
+    source: availableTags,
+    autoFocus: true, //配备的第一个参数会被自动选中
+    appendTo: "#someElem", //把资源追加到指定容器中
+    delay:300, //搜索延迟展示下拉时间
+    // disabled: true  //是否隐藏提示框
+    minLength:1, //输入多少字符长度为多少的时候才 开启提示功能
+    
+  });
+});
+
+//以上是初始化
+</script>
+<script>
+$(function(){
+    console.log($( ".selector" ).autocomplete());
+    // 获取资源所在容器
+    var appendTo = $( ".selector" ).autocomplete( "option", "appendTo" );
+     
+    // 设置资源所在容器
+    $( ".selector" ).autocomplete( "option", "appendTo", "#someElem" );
+
+    // 获取自动选中
+    var autoFocus = $( ".selector" ).autocomplete( "option", "autoFocus" );
+     
+    // 设置自动选中
+    $( ".selector" ).autocomplete( "option", "autoFocus", true );
+
+    // Getter
+    var delay = $( ".selector" ).autocomplete( "option", "delay" );
+    console.log(delay);
+    // Setter
+    $( ".selector" ).autocomplete( "option", "delay", 200 );
+    var delay = $( ".selector" ).autocomplete( "option", "delay" );
+    console.log(delay);
+
+    // Getter
+    var disabled = $( ".selector" ).autocomplete( "option", "disabled" );
+     
+    // Setter
+    // $( ".selector" ).autocomplete( "option", "disabled", true );
+
+    // Getter
+    var minLength = $( ".selector" ).autocomplete( "option", "minLength" );
+     
+    // Setter
+    $( ".selector" ).autocomplete( "option", "minLength", 0 );
+
+    // Getter 提示框位置
+    // var position = $( ".selector" ).autocomplete( "option", "position" );
+     
+    // Setter
+    // $( ".selector" ).autocomplete( "option", "position", { my : "right top", at: "right bottom" } );
+
+});
+    
+</script>
+

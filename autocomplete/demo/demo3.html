@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>autocomplete.js 插件学习</title>
+        <link rel="stylesheet" href="../css/jquery-ui.css" type="text/css">
+        <link rel="stylesheet" href="../css/jquery-ui.theme.css" type="text/css">
+        <style>
+			.margin-top-bottom{margin-bottom: 5px;margin-top: 5px}
+			.padding-top-bottom{padding-top: 5px;padding-bottom: 5px}
+			#output{color:red;}
+        </style>
+    </head>
+    <body>
+    <h2>autocomplete---回调函数 function(Object request,Function response( Object data )){}  回复回调函数</h2>
+    	<form action="../php/demo.php" method="get" id="form-id">
+    		<div class="margin-top-bottom padding-top-bottom">
+    			<input type="text" name="search" id="search">
+    		</div>
+            <div id="someElem"></div>
+    	</form>
+    	<div id="output"></div>
+		<script src="../js/jquery-2.1.4.min.js"></script> 
+    	<script src="../js/jquery-ui.js"></script>
+    </body>
+</html>
+<script>
+$(function() {
+  var availableTags = [
+    "ActionScript",
+    "AppleScript",
+    "Asp",
+    "BASIC",
+    "C",
+    "C++",
+    "Clojure",
+    "COBOL",
+    "ColdFusion",
+    "Erlang",
+    "Fortran",
+    "Groovy",
+    "Haskell",
+    "Java",
+    "JavaScript",
+    "Lisp",
+    "Perl",
+    "PHP",
+    "Python",
+    "Ruby",
+    "Scala",
+    "Scheme"
+  ];
+  $( "#search" ).autocomplete({
+    source:"../php/source.php", //必须返回jsonp格式
+    autoFocus: true, //配备的第一个参数会被自动选中
+  });
+});
+
+//以上是初始化
+</script>
+<script>
+/*
+    source:[ "Choice1", "Choice2" ] // 字符串数组
+
+    source:[ { label: "Choice1", value: "value1" }, ... ] // 键值对数组对象
+    
+    source:"url"  //请求远程的数据资源
+
+    source:function //回调函数
+    
+ */
+
+</script>
+

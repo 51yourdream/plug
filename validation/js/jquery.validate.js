@@ -163,6 +163,9 @@ $.extend($.fn, {
 		data = $.validator.normalizeRules(
 		$.extend(
 			{},
+			//手动添加 为了支持 jquery.metadata.js 插件扩展 开始
+			$.validator.metadataRules(element),
+			//结束
 			$.validator.classRules( element ),
 			$.validator.attributeRules( element ),
 			$.validator.dataRules( element ),
@@ -1060,6 +1063,22 @@ $.extend( $.validator, {
 		}
 		return rules;
 	},
+
+	//手动添加的内容用来支持 jquery.metadata.js 插件扩展 开始
+	metadataRules: function(element) {
+
+	if (!$.metadata) return {};
+
+	var meta = $.data(element.form, 'validator').settings.meta;
+
+	return meta ?
+
+	$(element).metadata()[meta] :
+
+	$(element).metadata();
+
+	},
+	//手动添加的内容用来支持 jquery.metadata.js 插件扩展 结束
 
 	staticRules: function( element ) {
 		var rules = {},

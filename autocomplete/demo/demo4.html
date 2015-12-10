@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>autocomplete.js 插件学习</title>
+        <link rel="stylesheet" href="../css/jquery-ui.css" type="text/css">
+        <link rel="stylesheet" href="../css/jquery-ui.theme.css" type="text/css">
+        <style>
+			.margin-top-bottom{margin-bottom: 5px;margin-top: 5px}
+			.padding-top-bottom{padding-top: 5px;padding-bottom: 5px}
+			#output{color:red;}
+        </style>
+    </head>
+    <body>
+    <h2>autocomplete--中的方法</h2>
+    	<form action="../php/demo.php" method="get" id="form-id">
+    		<div class="margin-top-bottom padding-top-bottom">
+    			<input type="text" name="search" id="search">
+    		</div>
+            <div id="someElem"></div>
+    	</form>
+    	<div id="output"></div>
+		<script src="../js/jquery-2.1.4.min.js"></script> 
+    	<script src="../js/jquery-ui.js"></script>
+    </body>
+</html>
+<script>
+$(function() {
+  var availableTags = [
+    "ActionScript",
+    "AppleScript",
+    "Asp",
+    "BASIC",
+    "C",
+    "C++",
+    "Clojure",
+    "COBOL",
+    "ColdFusion",
+    "Erlang",
+    "Fortran",
+    "Groovy",
+    "Haskell",
+    "Java",
+    "JavaScript",
+    "Lisp",
+    "Perl",
+    "PHP",
+    "Python",
+    "Ruby",
+    "Scala",
+    "Scheme"
+  ];
+  $( "#search" ).autocomplete({
+    source:availableTags, //必须返回jsonp格式
+    autoFocus: true, //配备的第一个参数会被自动选中
+  });
+});
+
+//以上是初始化
+</script>
+
+<script>
+$(function(){
+	// 方法：
+	// close() //不需要任何参数
+	// $( "#search" ).autocomplete( "close" );
+
+	// destroy() //不需要任何参数
+	// $( "#search" ).autocomplete( "destroy" );
+	
+	// disable() //不需要任何参数
+	$( "#search" ).autocomplete( "disable" );
+
+	//enable(); //使autocomplete 可用
+	$( "#search" ).autocomplete( "enable" );
+
+	//instance()
+	//返回Autocomplete的对象实例。如果指定元素没有关联的实例，则返回undefined。
+	$( "#search" ).autocomplete( "instance" );
+
+	//option( [ optionName [, value ] ] )
+
+	//设置或返回Autocomplete的配置选项。该方法有以下4种形式：
+	// 形式一：以对象形式返回所有配置选项。
+	var options = $( "#search" ).autocomplete( "option" );
+
+	// 形式二：根据选项名称获取单个配置选项
+	var isDisabled= $( "#search" ).autocomplete( "option", "disabled" );
+
+	// 形式三：设置指定配置选项的值
+	// $( "#search" ).autocomplete( "option", "disabled", true );
+
+	// 形式四：以对象形式同时设置一个或多个配置选项的值
+	// $( "#search" ).autocomplete( "option", { "disabled": true, "delay": 500 } );
+
+	//search( [ value ] )
+
+	//触发search事件，如果该事件未被取消的话，Autocomplete将调用数据源来显示菜单。如果没有为其指定value参数，它将当前输入元素的值(指定了的话，就使用指定的value值)。
+	$( "#search" ).autocomplete( "search","Fortran" ); //默认下拉候选菜单会显示 Fortran
+
+	//widget()
+	//返回匹配菜单元素的jQuery对象(实际匹配一个div元素，该div内用于放置显示菜单的html内容)。尽管菜单项是即时创建和销毁的，但菜单元素本身并不会重复创建和销毁。它在初始化时被创建，然后一直被重复使用。
+	
+	var widget =  $( "#search" ).autocomplete( "widget" );
+	console.log(widget);
+
+});
+
+</script>
+
