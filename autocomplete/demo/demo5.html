@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>autocomplete.js 插件学习</title>
+        <link rel="stylesheet" href="../css/jquery-ui.css" type="text/css">
+        <link rel="stylesheet" href="../css/jquery-ui.theme.css" type="text/css">
+        <style>
+			.margin-top-bottom{margin-bottom: 5px;margin-top: 5px}
+			.padding-top-bottom{padding-top: 5px;padding-bottom: 5px}
+			#output{color:red;}
+        </style>
+    </head>
+    <body>
+    <h2>autocomplete--中的事件API</h2>
+    	<form action="../php/demo.php" method="get" id="form-id">
+    		<div class="margin-top-bottom padding-top-bottom">
+    			<input type="text" name="search" id="search">
+    		</div>
+            <div id="someElem"></div>
+    	</form>
+    	<div id="output"></div>
+		<script src="../js/jquery-2.1.4.min.js"></script> 
+    	<script src="../js/jquery-ui.js"></script>
+    </body>
+</html>
+<script>
+$(function() {
+  var availableTags = [
+    "ActionScript",
+    "AppleScript",
+    "Asp",
+    "BASIC",
+    "C",
+    "C++",
+    "Clojure",
+    "COBOL",
+    "ColdFusion",
+    "Erlang",
+    "Fortran",
+    "Groovy",
+    "Haskell",
+    "Java",
+    "JavaScript",
+    "Lisp",
+    "Perl",
+    "PHP",
+    "Python",
+    "Ruby",
+    "Scala",
+    "Scheme"
+  ];
+  $( "#search" ).autocomplete({
+    source:availableTags, //必须返回jsonp格式
+    autoFocus: true, //配备的第一个参数会被自动选中
+  });
+});
+
+//以上是初始化
+</script>
+
+<script>
+$(function(){
+	// 事件API
+
+//Autocomplete的事件均可以在初始化的时候，以配置选项的形式设置，例如：
+
+$( "#title" ).autocomplete({
+  change: function( event, ui ) { /* 这里是函数内的代码 */ }
+});
+
+//你也可以通过jQuery的事件绑定方法，为Autocomplete的指定事件添加处理函数。这使得Autocomplete的事件可以像常见的click、mouseover事件一样，通过jQuery的事件方法进行处理。例如：
+
+// autocompletechange 就是autocomplete插件的change事件
+// autocomplete的事件全名均为 "autocomplete"+"具体事件名"
+
+$("#title").on("autocompletechange",function( event, ui ) {
+    /* 这里是函数内的代码 */ 
+});
+	
+});
+
+</script>
+<script>
+    // Autocomplete的事件列表
+
+    //change 事件
+
+    //当输入框失去焦点时，如果其输入内容发生改变，则触发该事件。其事件全名为autocompletechange。
+
+    $( "#title" ).autocomplete({
+        change: function( event, ui ) {
+            // event 是当前事件对象
+            
+            // ui对象仅有一个item属性，它表示当前选择的菜单项对应的数据源对象
+            // 该对象具有label和value属性，以及其它自定义(如果有的话)的属性
+            // 如果当前没有选择的菜单项，这item属性为null
+        }
+    });
+    //close 事件
+
+    //当菜单被隐藏(关闭)时触发该事件。其事件全名为autocompleteclose。并不是每一个change事件都伴随着一个close事件。
+
+    $( "#title" ).autocomplete({
+        close: function( event, ui ) {
+            // event 是当前事件对象
+            
+            // ui对象是空的，只是为了和其他事件的参数签名保持一致
+        }
+    });
+    //create 事件
+
+    //当Autocomplete被创建时触发该事件。其事件全名为autocompletecreate。
+
+    $( "#title" ).autocomplete({
+        create: function( event, ui ) {
+            // event 是当前事件对象
+            
+            // ui对象是空的，只是为了和其他事件的参数签名保持一致
+        }
+    });
+    //focus 事件
+
+    //当任一菜单项获得焦点时触发该事件，该事件只会在通过键盘交互方式使菜单项获得焦点时触发。其事件全名为autocompletefocus。其默认行为是将输入框的文本内容更改为当前选中项的value属性值。
+
+    //取消该事件的默认行为( event.preventDefault() )，可以阻止输入框的值被更改，但不会阻止菜单项获得焦点。
+
+    $( "#title" ).autocomplete({
+        focus: function( event, ui ) {
+            // event 是当前事件对象
+            
+            // ui对象仅有一个item属性，它表示当前获取焦点的菜单项对应的数据源对象
+            // 该对象具有label和value属性，以及其它自定义(如果有的话)的属性
+        }
+    });
+    //open 事件
+
+    //当菜单显示(打开)或被更新时触发该事件。其事件全名为autocompleteopen。
+
+    $( "#title" ).autocomplete({
+        open: function( event, ui ) {
+            // event 是当前事件对象
+            
+            // ui对象是空的，只是为了和其他事件的参数签名保持一致
+        }
+    });
+    //response 事件
+
+    //当自动完成的搜索完成，但尚未显示菜单时触发该事件。其事件全名为autocompleteresponse。你可以通过该事件来更改数据，从而修改显示的菜单内容。
+
+    $( "#title" ).autocomplete({
+        response: function( event, ui ) {
+            // event 是当前事件对象
+            
+            // ui对象仅有一个content属性，它表示当前用于显示菜单的数组数据
+            // 每个元素都是具有label和value属性的对象
+            // 你可以对属性进行更改，从而改变显示的菜单内容
+        }
+    });
+    //search 事件
+
+    //当一次自动完成的搜索被执行前触发该事件。其事件全名为autocompletesearch。如果被取消，则不会开始一个请求，并且不会显示菜单项。
+
+    $( "#title" ).autocomplete({
+        search: function( event, ui ) {
+            // event 是当前事件对象
+            
+            // ui对象是空的，只是为了和其他事件的参数签名保持一致
+        }
+    });
+    //select 事件
+
+    //当任一菜单项被选择时触发该事件。其事件全名为autocompleteselect。其默认行为是将输入框的文本内容更改为当前选中项的value属性值。
+
+    //取消该事件的默认行为( event.preventDefault() )，可以阻止输入框的值被更改，但不会阻止菜单被关闭。
+
+    $( "#title" ).autocomplete({
+        select: function( event, ui ) {
+            // event 是当前事件对象
+            
+            // ui对象仅有一个item属性，它表示当前被选中的菜单项对应的数据源对象
+            // 该对象具有label和value属性，以及其它自定义(如果有的话)的属性
+        }
+    });
+
+</script>
