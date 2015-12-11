@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>jquery.contentmenu.js 插件学习</title>
+        <style type="text/css">
+               
+        </style>
+    </head>
+
+    <body>
+    <h2>jquery.contentmenu.js</h2>
+       <div class="contextMenu" id="sysMenu">
+        <ul>
+          <li id="Li1"><img src="../images/new.png" /> 新建</li>
+          <li id="Li2"><img src="../images/folder.png" /> 打开</li>
+          <li id="Li3"><img src="../images/disk.png" /> 保存</li>
+          <hr />
+          <li id="Li4"><img src="../images/cross.png" /> 退出</li>
+        </ul>
+       </div>
+       <input type="button" value="点我测试" id="btn">
+		  <script src="../js/jquery-2.1.4.min.js"></script> 
+      <script src="../js/jquery.contentmenu.js"></script>
+    	<!-- // <script src="../js/browser.js"></script> -->
+    </body>
+</html>
+<script type="text/javascript">
+  $(function() {
+    $('#btn').contextMenu('sysMenu',
+    { bindings:
+      {
+        'Li1': function(Item) {
+          alert("在ID号为：" + Item.id + "编辑框中，您点击了“新建”项");
+        },
+        'Li2': function(Item) {
+          alert("在ID号为：" + Item.id + "编辑框中，您点击了“打开”项");
+        },
+        'Li3': function(Item) {
+          alert("在ID号为：" + Item.id + "编辑框中，您点击了“保存”项");
+        },
+        'Li4': function(Item) {
+           alert("在ID号为：" + Item.id + "编辑框中，您点击了“退出”项");
+        }
+        //设置其它选项事件
+        //...
+      },
+      menuStyle:{ //菜单外框样式
+            border:"2px solid #999"
+        },
+        itemStyle:{ //菜单选项样式
+          footFamily:'verdana',
+          backgroundColor:"#666",
+          color:'white',
+          border:'none',
+          padding:'1px'
+        },
+        itemHoverStyle:{ //选项选中样式
+          color:'#666',
+          backgroundColor:'#f7f7f7',
+          border:'none'
+        }
+    });
+  })
+
+/*
+  // 插件说明
+  $(element).contextMenu(Mid[,Option]);
+  其中,字符参数Mid表示与菜单绑定的元素ID号.可选项对象Option可以设置元素与菜单绑定时的属性或事件,其包含的属性和事件代码如下
+  $(element).contextMenu(Mid,
+    {
+      bindings{//绑定菜单时，根据ID号获取或设置各选项属性和事件
+        "选项ID号",function(item){//参数item为被绑定的元素
+            //获取或设置该选项属性
+        },
+        menuStyle:{ //菜单外框样式
+
+        },
+        itemStyle:{ //菜单选项样式
+
+        },
+        itemHoverStyle:{ //选项选中样式
+
+        }
+
+      },
+      Shadow:true, //设置一个布尔值,默认为true,即是否显示背景阴影 
+      eventPosY: //指定菜单弹出时，在页面中的Y值
+      eventPosX: //指定菜单弹出时，在页面中的X值
+      onContextMenu:function(e){ //菜单内容显示事件
+        //其中通过回调函数中的参数e,可以获取绑定菜单的参数,即e.target
+        //如果该函数返回false，将不会弹出快捷菜单
+      },
+      onShowMenu:function(e,menu){ //菜单显示事件
+        //其中通过函数中的参数e,可以获取被绑定菜单的参数,
+        即e.target
+        //参数menu是显示的菜单通过该参数可以访问其中的某一个选项,如移除第1个选项,代码如下:
+        $('第1个选项ID号',menu).remove();
+        return menu;
+      }
+    });
+  */
+</script>
+
