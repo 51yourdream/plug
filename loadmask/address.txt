@@ -1,0 +1,3 @@
+主页：http://code.google.com/p/jquery-loadmask/
+Download: http://code.google.com/p/jquery-loadmask/downloads/list
+DEMO: http://jquery-loadmask.googlecode.com/svn/trunk/demo/index.html

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>nivo-slider 学习</title>
+        <link rel="stylesheet" href="../css/themes/default/default.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="../css/themes/light/light.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="../css/themes/dark/dark.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="../css/themes/bar/bar.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="../css/nivo-slider.css" type="text/css" media="screen" />
+        <!-- <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" /> -->
+        <style>
+          .nivo-controlNav.nivo-thumbs-enabled a.nivo-control{border:1px solid white;border-radius: 2px}
+          .nivo-controlNav.nivo-thumbs-enabled a.active{border:1px solid red;}
+        </style>
+    </head>
+
+    <body>
+    <h1>nivo-slider</h1>
+    <div id="wrapper">
+        <a href="http://dev7studios.com" id="dev7link" title="Go to dev7studios">dev7studios</a>
+
+        <div class="slider-wrapper theme-default">
+            <div id="slider" class="nivoSlider">
+                <img src="../images/toystory.jpg" data-thumb="../images/toystory.jpg" alt="" title="这里是标题"/>
+
+                <a href="http://dev7studios.com"><img src="../images/up.jpg" data-thumb="../images/up.jpg" alt="" title="<a href='http://www.baidu.com'>这里我用了a标签不知道起不起效果</a>" /></a>
+
+                <img src="../images/walle.jpg" data-thumb="../images/walle.jpg" alt="" data-transition="slideInLeft" title="qwertyuifghj" />
+
+                <img src="../images/nemo.jpg" data-thumb="../images/nemo.jpg" alt="" title="#htmlcaption" title="23456789fghj"/>
+
+            </div>
+            <div id="htmlcaption" class="nivo-html-caption">
+                <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>. 
+            </div>
+        </div>
+
+    </div>
+    <div>
+      <h2>参数说明:</h2>
+      <ol>
+        <li>effect: 设置幻灯变化效果，可以使用'random', 或者指定效果如, sliceDownRight','sliceDownLeft','sliceUpRight','sliceUpLeft','sliceUpDown','sliceUpDownLeft','fold','fade',
+                'boxRandom','boxRain','boxRainReverse','boxRainGrow','boxRainGrowReverse'</li>
+        <li>slices: slice动画效果参数</li>
+        <li>boxCols: box动画效果参数</li>
+        <li>boxRows:box动画效果参数</li>
+        <li>animSpeed: 动画变化速度</li>
+        <li>pauseTime: 每个幻灯时间</li>
+        <li>startSlide: 起始幻灯</li>
+        <li>directionNav: 是否显示“上一个”和“下一个”导航</li>
+        <li>controlNav: 是否显示导航控制</li>
+        <li>controlNavThumbs: 导航是否使用缩略图</li>
+        <li>pauseOnHover: 悬浮是否停止</li>
+        <li>manualAdvance: 是否手动变化幻灯</li>
+        <li>prevText: 上一张文字设定</li>
+        <li>nextText: 下一张文字设定</li>
+        <li>randomStart: 是否随机开始</li>
+        <li>beforeChange:function(){} 函数，在幻灯变化前调用</li>
+        <li>afterChange:function(){}函数，在幻灯变化后调用</li>
+        <li>slideshowEnd:function(){}函数，在幻灯变化完成调用</li>
+        <li>lastSlide:function(){}函数，在最后一个幻灯变化完成调用</li>
+        <li>afterLoad:function(){} 函数，slider加载后调用</li>
+      </ol>
+    </div>
+    <div>
+<pre> 
+    $('#slider').nivoSlider({
+        effect: 'random',                 // Specify sets like: 'fold,fade,sliceDown'
+        slices: 15,                     // For slice animations
+        boxCols: 8,                     // For box animations
+        boxRows: 4,                     // For box animations
+        animSpeed: 500,                 // Slide transition speed
+        pauseTime: 3000,                 // How long each slide will show
+        startSlide: 0,                     // Set starting Slide (0 index)
+        directionNav: true,             // Next & Prev navigation
+        controlNav: true,                 // 1,2,3... navigation
+        controlNavThumbs: false,         // Use thumbnails for Control Nav
+        pauseOnHover: true,             // Stop animation while hovering
+        manualAdvance: false,             // Force manual transitions
+        prevText: 'Prev',                 // Prev directionNav text
+        nextText: 'Next',                 // Next directionNav text
+        randomStart: false,             // Start on a random slide
+        beforeChange: function(){},     // Triggers before a slide transition
+        afterChange: function(){},         // Triggers after a slide transition
+        slideshowEnd: function(){},     // Triggers after all slides have been shown
+        lastSlide: function(){},         // Triggers when last slide is shown
+        afterLoad: function(){}         // Triggers when slider has loaded
+    });
+</pre>
+    </div>
+   
+	  <script src="../js/jquery-2.1.4.min.js"></script> 
+    <script src="../js/browser.js"></script>
+    <script src="../js/jquery.nivo.slider.js"></script>
+    	
+    </body>
+</html>
+
+ <script type="text/javascript">
+    $(window).load(function() {
+        $('#slider').nivoSlider({
+          controlNavThumbs:true
+        });
+    });
+    //data-thumb 是导航缩略图 路径 一般与图片路径一样
+</script>
+
